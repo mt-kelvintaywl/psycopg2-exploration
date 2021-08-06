@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import psycopg2 as pg
@@ -21,13 +22,23 @@ def fancy_query(cursor):
   qry = """
   SELECT id, message
   FROM comments
-  WHERE message LIKE %(prefix)s
+  WHERE message LIKE %(prefix)s AND created_at >= %(created_after)s
   ORDER BY id DESC
   LIMIT %(limit)s
   """
-  args = { "limit": 1, "prefix": "th%" }
+  args = {
+      "limit": 1,
+      "prefix": "th%",
+      "created_after": datetime.date(2021, 1, 1)
+  }
   cursor.execute(qry, args)
-  print(cursor.fetchall())
+  results = cursor.fetchall()
+  print(results)
+  assert len(results) == 1
+  id, message = results[0]
+  assert id == 3
+  assert message == "third comment"
+
 
 def main(db_url: str):
     conn = pg.connect(db_url)
