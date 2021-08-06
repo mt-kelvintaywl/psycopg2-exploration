@@ -26,7 +26,7 @@ jobs:
             - run: rm .python-version
       - run:
           name: Test
-          command: pipenv run python ./try.py
+          command: pipenv run test
 
 workflows:
   showcase:
