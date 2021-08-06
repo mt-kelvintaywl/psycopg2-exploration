@@ -6,7 +6,7 @@ orbs:
 executors:
   python_postgres:
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/python:3.7
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: postgres
@@ -22,6 +22,8 @@ jobs:
       - python/install-packages:
           pkg-manager: pipenv
           args: --dev
+          pre-install-steps:
+            - run: rm .python-version
       - run:
           name: Test
           command: pipenv run python ./try.py
