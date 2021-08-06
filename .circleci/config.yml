@@ -8,12 +8,15 @@ executors:
     docker:
       - image: cimg/python:3.8
       - image: circleci/postgres:10
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres123
 
 jobs:
   try_psycopg2:
     executor: python_postgres
     environment:
-      DATABASE_URL: postgresql://root@localhost/circle_test
+      DATABASE_URL: postgresql://postgres:postgres123@localhost/circle_test
     steps:
       - checkout
       - python/install-packages:
