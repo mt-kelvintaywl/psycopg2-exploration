@@ -3,4 +3,4 @@ CREATE TABLE comments (
   message TEXT NOT NULL
 );
 
-INSERT INTO comments (message) VALUES ('first blood!', 'hello', 'whut');
+INSERT INTO comments (message) VALUES ('first blood!'), ('hello'), ('whut');
