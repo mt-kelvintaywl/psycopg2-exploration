@@ -76,7 +76,7 @@ def test_like_clause_with_percentage_harcoded(cursor):
     )
     SELECT id, message
     FROM sampled
-    WHERE message LIKE 'th%'
+    WHERE message LIKE 'th%%'
     """
     args = {"size": 3}
     cursor.execute(qry, args)
