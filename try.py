@@ -13,7 +13,7 @@ def setup_tables(cursor):
   );""")
 
   cursor.execute("""
-  INSERT INTO comments (message) VALUES ('first blood!'), ('hello'), ('whut');
+  INSERT INTO comments (message) VALUES ('first blood!'), ('this is hello'), ('third comment');
   """)
 
 
@@ -21,9 +21,11 @@ def fancy_query(cursor):
   qry = """
   SELECT id, message
   FROM comments
+  WHERE message LIKE %(prefix)s
+  ORDER BY id DESC
   LIMIT %(limit)s
   """
-  args = { "limit": 1 }
+  args = { "limit": 1, "prefix": "th%" }
   cursor.execute(qry, args)
   print(cursor.fetchall())
 
