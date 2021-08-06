@@ -22,7 +22,6 @@ jobs:
       - python/install-packages:
           pkg-manager: pipenv
           args: --dev
-      - run: ls -la
       - run:
           name: Test
           command: pipenv run python ./try.py
