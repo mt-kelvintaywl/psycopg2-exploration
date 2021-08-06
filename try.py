@@ -8,7 +8,8 @@ def setup_tables(cursor):
   cursor.execute("""
   CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    message TEXT NOT NULL
+    message TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
   );""")
 
   cursor.execute("""
