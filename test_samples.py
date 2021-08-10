@@ -64,3 +64,21 @@ def test_multiple_args(cursor):
     id, message = rows[0]
     assert id == 3 
     assert message == "third comment"
+
+
+def test_like_clause_with_percentage_harcoded(cursor):
+    qry = """
+    WITH sampled AS (
+      SELECT *
+      FROM comments
+      ORDER BY id DESC
+      LIMIT %(size)s
+    )
+    SELECT id, message
+    FROM sampled
+    WHERE message LIKE 'th%%'
+    """
+    args = {"size": 3}
+    cursor.execute(qry, args)
+    rows = cursor.fetchall()
+    assert len(rows) == 2
